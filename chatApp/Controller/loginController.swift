@@ -34,7 +34,6 @@ class loginController: UIViewController {
         textField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         textField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        
 
     }
 

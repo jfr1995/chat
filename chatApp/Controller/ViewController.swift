@@ -11,8 +11,10 @@ class ViewController: UITableViewController {
     }
 
     @objc func handleLogout(){
-        let lController = loginController()
-        present(lController, animated: true, completion: nil)
+        let lController  = loginController()
+        print("test 3")
+        self.present(lController, animated: true, completion: nil)
+        print("test 4")
         
     }
 

@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // create manual window
-        
+        print("test 1")
         window  = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
        window?.rootViewController = UINavigationController(rootViewController: ViewController())
-        
+        print("test 2")
         
         return true
     }
