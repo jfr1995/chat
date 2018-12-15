@@ -13,26 +13,78 @@ class loginController: UIViewController {
         return view
     }()
     
+    let registerButton : UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        button.setTitle("Register", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(UIColor.white, for: .normal)
+        return button
+    }()
+    
+    let separatorView : UIView = {
+        let sv = UIView()
+        //sv.backgroundColor = UIColor.init(r: 220, g: 220, b: 220)
+        sv.backgroundColor = UIColor.black
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    
+    let nameTextField : UITextField = {
+        let textField  = UITextField()
+        textField.placeholder = "Name"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         view.addSubview(inputsContainerView)
+        view.addSubview(registerButton)
         setupInputsContainerView()
+        setupRegisterLoginButton()
         
         
     }
     
+    func setupRegisterLoginButton(){
+        // need x, y, widht, and height constraints
+        registerButton.centerXAnchor.constraint(equalTo: inputsContainerView.centerXAnchor).isActive = true
+        registerButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor).isActive = true
+        registerButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor, constant: 0).isActive = true
+        registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
     
     func setupInputsContainerView(){
-        //constraints need x, y, width and height
+        //inputs container view constraints
         inputsContainerView.translatesAutoresizingMaskIntoConstraints = false
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         inputsContainerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-    }
+        
+        // add the subviews of inputs container view
+        inputsContainerView.addSubview(nameTextField)
+        inputsContainerView.addSubview(separatorView)
+        
+        // name text field constraints
+        nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
+        nameTextField.topAnchor.constraint(equalTo: inputsContainerView.topAnchor).isActive = true
+        nameTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        
+        // separator view constraints
+        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        separatorView.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        separatorView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 0).isActive = true
+        separatorView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 0).isActive = true
+        }
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
