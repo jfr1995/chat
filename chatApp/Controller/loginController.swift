@@ -1,53 +1,51 @@
 
-//// create and setup the inputs container
-//let inputsContainer = UIView()
-//inputsContainer.backgroundColor = UIColor.white
-//inputsContainer.translatesAutoresizingMaskIntoConstraints = false
-//view.addSubview(inputsContainer)
-//inputsContainer.layer.cornerRadius = 10
-//inputsContainer.layer.masksToBounds = true
-//
-//// need an x, y, width and height constraints
-//inputsContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-//inputsContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-//inputsContainer.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -120).isActive = true
-//inputsContainer.heightAnchor.constraint(equalToConstant: 150).isActive = true
-
 
 import UIKit
 
 class loginController: UIViewController {
-    //inputs container variable
-    
-    
+
+    let inputsContainerView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        return view
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
+        view.addSubview(inputsContainerView)
+        setupInputsContainerView()
         
         
-        let textField = UITextField()
-        textField.backgroundColor = UIColor.white
-        textField.translatesAutoresizingMaskIntoConstraints = false;
-        textField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        textField.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-
     }
-
-
-    override var preferredStatusBarStyle: UIStatusBarStyle{
+    
+    
+    func setupInputsContainerView(){
+        //constraints need x, y, width and height
+        inputsContainerView.translatesAutoresizingMaskIntoConstraints = false
+        inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        inputsContainerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+    }
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
+    
+
     
 }
 
 
-extension UIColor{
-    
-    convenience init( r : CGFloat, g: CGFloat, b: CGFloat){
-    self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
+extension UIColor {
+    convenience init(r: CGFloat, g: CGFloat, b: CGFloat){
+    self.init(red : r/255, green: g/255, blue: b/255, alpha: 1)
     }
 }
