@@ -4,11 +4,15 @@ import UIKit
 
 class loginController: UIViewController {
     
-    let login_register_segmented_control : UISegmentedControl = {
-        let lr = UISegmentedControl(items:["Login", "Register"])
-        lr.translatesAutoresizingMaskIntoConstraints = false
-        return lr
+    let loginTitle : UILabel = {
+        let lt = UILabel()
+        lt.text = "Chat App"
+        lt.textColor = UIColor.white
+       // lt.translatesAutoresizingMaskIntoConstraints = false
+        return lt
     }()
+    
+    
 
     let inputsContainerView : UIView = {
         let view = UIView()
@@ -104,7 +108,7 @@ class loginController: UIViewController {
         inputsContainerView.addSubview(emailTextField)
         inputsContainerView.addSubview(separatorView2)
         inputsContainerView.addSubview(passwordTextField)
-        inputsContainerView.addSubview(login_register_segmented_control)
+        inputsContainerView.addSubview(loginTitle)
         
         // name text field constraints
         nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -134,6 +138,9 @@ class loginController: UIViewController {
         separatorView2.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
         separatorView2.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 0).isActive = true
         separatorView2.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0).isActive = true
+        
+        // label constraints
+        
         
         }
     
