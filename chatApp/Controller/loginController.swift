@@ -3,6 +3,12 @@
 import UIKit
 
 class loginController: UIViewController {
+    
+    let login_register_segmented_control : UISegmentedControl = {
+        let lr = UISegmentedControl(items:["Login", "Register"])
+        lr.translatesAutoresizingMaskIntoConstraints = false
+        return lr
+    }()
 
     let inputsContainerView : UIView = {
         let view = UIView()
@@ -30,11 +36,34 @@ class loginController: UIViewController {
         return sv
     }()
     
+    let separatorView2 : UIView = {
+        let sv2 = UIView()
+        //sv.backgroundColor = UIColor.init(r: 220, g: 220, b: 220)
+        sv2.backgroundColor = UIColor.black
+        sv2.translatesAutoresizingMaskIntoConstraints = false
+        return sv2
+    }()
+    
     let nameTextField : UITextField = {
         let textField  = UITextField()
         textField.placeholder = "Name"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
+    }()
+    
+    let emailTextField : UITextField = {
+        let ef = UITextField()
+        ef.placeholder = "Email"
+        ef.translatesAutoresizingMaskIntoConstraints = false
+        return ef
+    }()
+    
+    let passwordTextField : UITextField = {
+        let pf = UITextField()
+        pf.placeholder = "Password"
+        pf.translatesAutoresizingMaskIntoConstraints =  false
+        pf.isSecureTextEntry = true
+        return pf
     }()
     
 
@@ -72,6 +101,10 @@ class loginController: UIViewController {
         // add the subviews of inputs container view
         inputsContainerView.addSubview(nameTextField)
         inputsContainerView.addSubview(separatorView)
+        inputsContainerView.addSubview(emailTextField)
+        inputsContainerView.addSubview(separatorView2)
+        inputsContainerView.addSubview(passwordTextField)
+        inputsContainerView.addSubview(login_register_segmented_control)
         
         // name text field constraints
         nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -79,11 +112,29 @@ class loginController: UIViewController {
         nameTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
         nameTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
         
+        // email field constraints
+        emailTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant : 12).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: separatorView.bottomAnchor).isActive = true
+        emailTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        emailTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        
+        // password field constraints
+        passwordTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant : 12).isActive = true
+        passwordTextField.topAnchor.constraint(equalTo: separatorView2.bottomAnchor).isActive = true
+        passwordTextField.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: 1/3).isActive = true
+        
         // separator view constraints
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         separatorView.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
         separatorView.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 0).isActive = true
         separatorView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 0).isActive = true
+        // separator view 2 constraints
+        separatorView2.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        separatorView2.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor).isActive = true
+        separatorView2.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 0).isActive = true
+        separatorView2.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0).isActive = true
+        
         }
     
     
