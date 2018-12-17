@@ -4,13 +4,6 @@ import UIKit
 
 class loginController: UIViewController {
     
-    let loginTitle : UILabel = {
-        let lt = UILabel()
-        lt.text = "Chat App"
-        lt.textColor = UIColor.white
-       // lt.translatesAutoresizingMaskIntoConstraints = false
-        return lt
-    }()
     
     
 
@@ -70,6 +63,14 @@ class loginController: UIViewController {
         return pf
     }()
     
+    let loginTitle : UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 26)
+        label.textColor = UIColor.white
+        label.text = "Chat App"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     
     
@@ -79,6 +80,7 @@ class loginController: UIViewController {
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         view.addSubview(inputsContainerView)
         view.addSubview(registerButton)
+        view.addSubview(loginTitle)
         setupInputsContainerView()
         setupRegisterLoginButton()
         
@@ -108,7 +110,8 @@ class loginController: UIViewController {
         inputsContainerView.addSubview(emailTextField)
         inputsContainerView.addSubview(separatorView2)
         inputsContainerView.addSubview(passwordTextField)
-        inputsContainerView.addSubview(loginTitle)
+    
+        
         
         // name text field constraints
         nameTextField.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 12).isActive = true
@@ -139,7 +142,13 @@ class loginController: UIViewController {
         separatorView2.leftAnchor.constraint(equalTo: inputsContainerView.leftAnchor, constant: 0).isActive = true
         separatorView2.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 0).isActive = true
         
-        // label constraints
+        
+        // title label constraints
+        loginTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginTitle.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -16).isActive = true
+        loginTitle.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        loginTitle.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    
         
         
         }
