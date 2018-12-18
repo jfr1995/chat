@@ -1,6 +1,7 @@
 
 
 import UIKit
+import Firebase
 
 class loginController: UIViewController {
     
@@ -22,6 +23,7 @@ class loginController: UIViewController {
         button.setTitle("Register", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         return button
     }()
     
@@ -85,6 +87,28 @@ class loginController: UIViewController {
         setupRegisterLoginButton()
         
         
+    }
+    // function to handle register button action
+    @objc func handleRegister(){
+        // ensure there is a response in the email and password fields
+        guard let email = emailTextField.text else {
+            "invalid input for email"
+            return
+        }
+        guard let password = passwordTextField.text else {
+            "invalid input for password"
+            return
+        }
+        // now we authenticate the user
+        Auth.auth().createUser(withEmail: email, password: password) { (User, error) in
+            if error != nil {
+                print("failure")
+                return
+            }
+            
+            // success
+            print("success")
+        }
     }
     
     func setupRegisterLoginButton(){
