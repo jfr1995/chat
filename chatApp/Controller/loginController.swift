@@ -17,7 +17,7 @@ class loginController: UIViewController {
         return view
     }()
     
-    let registerButton : UIButton = {
+    lazy var registerButton : UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.setTitle("Register", for: .normal)
@@ -92,23 +92,21 @@ class loginController: UIViewController {
     @objc func handleRegister(){
         // ensure there is a response in the email and password fields
         guard let email = emailTextField.text else {
-            "invalid input for email"
+            print("invalid input for email")
             return
         }
         guard let password = passwordTextField.text else {
-            "invalid input for password"
+            print("invalid input for password")
             return
         }
-        // now we authenticate the user
-        Auth.auth().createUser(withEmail: email, password: password) { (User, error) in
-            if error != nil {
-                print("failure")
-                return
-            }
-            
-            // success
-            print("success")
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            // ...
+            print(error)
+            guard let user = authResult?.user else { return }
         }
+        
+        
+        
     }
     
     func setupRegisterLoginButton(){
