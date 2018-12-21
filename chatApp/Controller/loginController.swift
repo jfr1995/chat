@@ -120,11 +120,13 @@ class loginController: UIViewController {
                 print("error 11111111")
                 return
             }
-            // successfully created user
-            var ref : DatabaseReference!
-            ref =  Database.database().reference()
-            ref.setValue(["test": 123])
-
+            // successfully created
+            let ref =  Database.database().reference(fromURL: "https://primeval-proton-202518.firebaseio.com/")
+            let val = ["name": name, "email": email]
+            ref.updateChildValues(val, withCompletionBlock: { (err, ref) in
+                print("shhiiiiiiit")
+            })
+            
         }
         
         
