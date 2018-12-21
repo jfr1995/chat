@@ -5,7 +5,14 @@ import Firebase
 
 class loginController: UIViewController {
     
-    
+    let loginSegmentedControls : UISegmentedControl = {
+       let segmentedControl  = UISegmentedControl(items: ["Sign In", "Register"])
+        segmentedControl.tintColor = UIColor.white
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        segmentedControl.selectedSegmentIndex = 1
+        //segmentedControl.addTarget(self, action: #selector(<#T##@objc method#>), for: <#T##UIControlEvents#>)
+        return segmentedControl
+    }()
     
 
     let inputsContainerView : UIView = {
@@ -83,11 +90,14 @@ class loginController: UIViewController {
         view.addSubview(inputsContainerView)
         view.addSubview(registerButton)
         view.addSubview(loginTitle)
+        view.addSubview(loginSegmentedControls)
         setupInputsContainerView()
         setupRegisterLoginButton()
-        
+        setupLoginSegmentedControls()
         
     }
+    
+    
     // function to handle register button action
     @objc func handleRegister(){
         // ensure there is a response in the email and password fields
@@ -99,14 +109,34 @@ class loginController: UIViewController {
             print("invalid input for password")
             return
         }
+        guard let name = nameTextField.text else {
+            print("Please enter a name")
+            return
+        }
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             // ...
-            print(error)
-            guard let user = authResult?.user else { return }
+            print("\n\n\n\n")
+            if error != nil {
+                print("error 11111111")
+                return
+            }
+            // successfully created user
+            var ref : DatabaseReference!
+            ref =  Database.database().reference()
+            ref.setValue(["test": 123])
+
         }
         
         
         
+    }
+    
+    func setupLoginSegmentedControls() {
+        // x, y, width, and height
+        loginSegmentedControls.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        loginSegmentedControls.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        loginSegmentedControls.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginSegmentedControls.bottomAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -10).isActive = true
     }
     
     func setupRegisterLoginButton(){
