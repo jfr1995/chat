@@ -10,26 +10,11 @@ class loginController: UIViewController {
         segmentedControl.tintColor = UIColor.white
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         segmentedControl.selectedSegmentIndex = 1
-        segmentedControl.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
+        //segmentedControl.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
         return segmentedControl
     }()
     
-    @objc func handleSegmentChange(){
-        let currentIndex = loginSegmentedControls.selectedSegmentIndex
-        switch currentIndex {
-        case 0:
-            setupInputsContainerview_sign_in()
-            inputsContainerView.needsUpdateConstraints()
-        case 1:
-            setupInputsContainerview_registration()
-            inputsContainerView.needsUpdateConstraints()
-
-        default:
-            print("case default")
-            return 
-        }
-        
-    }
+    
     
 
     let inputsContainerView : UIView = {
@@ -137,11 +122,19 @@ class loginController: UIViewController {
                 print("error 11111111")
                 return
             }
+            guard let uid  = authResult?.user.uid else {
+                return
+            }
             // successfully created
             let ref =  Database.database().reference(fromURL: "https://primeval-proton-202518.firebaseio.com/")
             let val = ["name": name, "email": email]
-            ref.updateChildValues(val, withCompletionBlock: { (err, ref) in
-                
+            let userRef = ref.child("users").child(uid)
+            userRef.updateChildValues(val, withCompletionBlock: { (err, ref) in
+                if err != nil {
+                    print(err)
+                    return
+                }
+                print("users saved into firebase database")
             })
             
         }
@@ -225,26 +218,6 @@ class loginController: UIViewController {
         
         }
     
-    
-    func setupInputsContainerview_sign_in(){
-        for view in inputsContainerView.subviews{
-            view.removeFromSuperview()
-        }
-        inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        inputsContainerView.heightAnchor.constraint(equalToConstant: 75).isActive = true
-        
-    }
-    
-    
-    func setupInputsContainerview_registration(){
-        for view in inputsContainerView.subviews{
-            view.removeFromSuperview()
-        }
-    
-        inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
-        inputsContainerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
