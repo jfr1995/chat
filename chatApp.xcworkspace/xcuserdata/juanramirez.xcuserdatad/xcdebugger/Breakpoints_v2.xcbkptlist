@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chatApp/Controller/loginController.swift"
-            timestampString = "568090358.117916"
+            timestampString = "568092393.927178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "handleRegister()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chatApp/Controller/loginController.swift"
-            timestampString = "568090358.118302"
+            timestampString = "568092393.92761"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "handleRegister()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "chatApp/Controller/loginController.swift"
-            timestampString = "568090358.118548"
+            timestampString = "568092393.927802"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "handleRegister()"
             landmarkType = "7">
          </BreakpointContent>

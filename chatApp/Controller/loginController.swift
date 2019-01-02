@@ -30,7 +30,7 @@ class loginController: UIViewController {
         guard let title = loginSegmentedControls.titleForSegment(at: loginSegmentedControls.selectedSegmentIndex) else {
             return
         }
-        registerButton.setTitle(title, for: .normal)
+        loginRegisterButton.setTitle(title, for: .normal)
         print(loginSegmentedControls.selectedSegmentIndex)
         inputsContainerViewHeightAnchor?.constant = loginSegmentedControls.selectedSegmentIndex == 0 ? 100 : 150
         
@@ -46,7 +46,7 @@ class loginController: UIViewController {
         
         passwordTextFieldHeightAnchor?.isActive = false
         passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginSegmentedControls.selectedSegmentIndex == 0 ? 1/2 : 1/3)
-        passwordTextFieldHeightAnchor?.isActive = true 
+        passwordTextFieldHeightAnchor?.isActive = true
     }
     
     
@@ -59,15 +59,40 @@ class loginController: UIViewController {
         return view
     }()
     
-    lazy var registerButton : UIButton = {
+    lazy var loginRegisterButton : UIButton = {
         let button = UIButton(type: UIButton.ButtonType.system)
         button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
         button.setTitle("Register", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginRegisterTap), for: .touchUpInside)
         return button
     }()
+    
+    @objc func handleLoginRegisterTap(){
+        if loginSegmentedControls.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+    }
+    
+    func handleLogin(){
+        guard let email = emailTextField.text else {
+            return
+        }
+        guard let pass = passwordTextField.text else {
+            return
+        }
+        Auth.auth().signIn(withEmail: email, password: pass) { (AuthDataResult, err) in
+            if err != nil {
+                print(err!)
+                return
+            }
+            // user was authennticated !!!!!
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
     
     let separatorView : UIView = {
         let sv = UIView()
@@ -123,7 +148,7 @@ class loginController: UIViewController {
         
         view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
         view.addSubview(inputsContainerView)
-        view.addSubview(registerButton)
+        view.addSubview(loginRegisterButton)
         view.addSubview(loginTitle)
         view.addSubview(loginSegmentedControls)
         setupInputsContainerView()
@@ -168,6 +193,7 @@ class loginController: UIViewController {
                     return
                 }
                 print("users saved into firebase database")
+                self.dismiss(animated: true, completion: nil)
             })
             
         }
@@ -186,10 +212,10 @@ class loginController: UIViewController {
     
     func setupRegisterLoginButton(){
         // need x, y, widht, and height constraints
-        registerButton.centerXAnchor.constraint(equalTo: inputsContainerView.centerXAnchor).isActive = true
-        registerButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor).isActive = true
-        registerButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor, constant: 0).isActive = true
-        registerButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        loginRegisterButton.centerXAnchor.constraint(equalTo: inputsContainerView.centerXAnchor).isActive = true
+        loginRegisterButton.topAnchor.constraint(equalTo: inputsContainerView.bottomAnchor).isActive = true
+        loginRegisterButton.widthAnchor.constraint(equalTo: inputsContainerView.widthAnchor, constant: 0).isActive = true
+        loginRegisterButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     
