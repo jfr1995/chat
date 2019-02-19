@@ -21,11 +21,18 @@ class NewMessageController: UITableViewController {
     // MARK: - Table view data source
     func fetchUsers(){
         Database.database().reference().child("users").observe(.childAdded) { (DataSnapshot) in
-            let dictionary = DataSnapshot.value as? [String: AnyObject?] ?? [:]
-            let newUsers = User()
-            newUsers.name = (dictionary["name"]! as! String)
-            newUsers.email = (dictionary["email"]! as! String)
-            self.users.append(newUsers)
+            
+            if let dictionary = DataSnapshot.value as? [String: AnyObject]{
+                let user = User()
+               
+                user.name = dictionary["name"] as? String
+                user.email = dictionary["email"] as? String
+                self.users.append(user)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
         }
     
     }
@@ -38,9 +45,18 @@ class NewMessageController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = UITableViewCell(style: .default, reuseIdentifier: cellID)
-            cell.textLabel?.text = "some text"
+    
+            let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
+            let user = users[indexPath.row]
+            cell.textLabel?.text = user.name
+            cell.detailTextLabel?.text = user.email
             return cell
     }
 
+}
+
+
+
+class UserCellClass{
+    
 }
